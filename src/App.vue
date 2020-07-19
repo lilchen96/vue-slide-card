@@ -1,8 +1,8 @@
 <template>
   <div>
     <test>
-      <template slot="content">13231331332</template>
-      <template slot="operation">2·21·312的点点滴滴31</template>
+      <template slot="content">test</template>
+      <template slot="operation">test</template>
     </test>
   </div>
 </template>
@@ -11,4 +11,6 @@
 export default {};
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+
+</style>
