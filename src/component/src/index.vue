@@ -45,8 +45,25 @@ export default {
       default: false,
     },
   },
-  computed: {},
-  watch: {},
+  computed: {
+    getCardStyle() {
+      let result = `transform: translateX(${this.cardOffset}px);`;
+      return result;
+    },
+  },
+  watch: {
+    deleteVisible: {
+      handler(val) {
+        if (val) {
+          this.operationOpacity = 1;
+          this.cardOffset = this.operationWidth * -1;
+        } else {
+          this.operationOpacity = 0;
+          this.cardOffset = 0;
+        }
+      },
+    },
+  },
   methods: {
     goDetail() {
       this.$emit("goDetailFn");
