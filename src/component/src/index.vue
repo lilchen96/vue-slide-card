@@ -11,11 +11,63 @@
 
 <script>
 export default {
-  name: "test",
+  components: {
+    uniCard,
+  },
+  data() {
+    return {
+      cardWidth: "",
+      cardOffset: 0,
+      operationOpacity: 0,
+      startPoint: {
+        x: "",
+        y: "",
+      },
+    };
+  },
   props: {
-    options: {
+    paramsVal: {
       type: Object,
+      default: null,
     },
+    // 是否可删除
+    isDelete: {
+      type: Boolean,
+      default: false,
+    },
+    operationWidth: {
+      type: Number,
+      default: 50,
+    },
+    // 删除是否可见
+    deleteVisible: {
+      type: false,
+      default: false,
+    },
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    goDetail() {
+      this.$emit("goDetailFn");
+    },
+    // 点击删除
+    handleDelete() {
+      this.$emit("handleDelete");
+    },
+    touchstart(e) {
+      if (!this.isDelete) {
+        return;
+      }
+      if (e.changedTouches.length > 1) {
+        return;
+      }
+      this.startPoint = {
+        x: e.changedTouches[0].pageX,
+        y: e.changedTouches[0].pageY,
+      };
+    },
+    touchmove(e) {},
   },
 };
 </script>
