@@ -68,6 +68,33 @@ export default {
       };
     },
     touchmove(e) {},
+    touchend(e) {
+      if (!this.isDelete) {
+        return;
+      }
+      if (e.changedTouches.length > 1) {
+        return;
+      }
+      const endPoint = {
+        x: e.changedTouches[0].pageX,
+        y: e.changedTouches[0].pageY,
+      };
+      const xOffset = endPoint.x - this.startPoint.x;
+      if (Math.abs(xOffset) <= 40) {
+        return;
+      }
+      if (xOffset > 0) {
+        this.operationOpacity = 0;
+        this.cardOffset = 0;
+        this.$emit("update:deleteVisible", false);
+      }
+      if (xOffset < 0) {
+        this.operationOpacity = 1;
+        this.cardOffset = this.operationWidth * -1;
+        this.$emit("update:deleteVisible", true);
+        this.$emit("show-delete");
+      }
+    },
   },
 };
 </script>
